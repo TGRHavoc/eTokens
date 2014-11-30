@@ -1,0 +1,9 @@
+name: eTokens
+main: ovh.tgrhavoc.etokens.eTokens
+version: 1.0
+author: TGRHavoc
+
+commands:
+    token:
+        aliases: [tokens]
+    shop:
