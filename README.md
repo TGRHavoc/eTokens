@@ -25,6 +25,11 @@ This also has the "repeatable" attribute which means that the user can complete 
 <token entity-type="ZOMBIE" kills="10" objective="kill" repeatable="true" token-amount="10">You have received {TOKEN-AMOUNT} tokens for killing {KILLS} {ENTITY-TYPE}(s)!</token>
 ```
 
+| XML Attribute | What it does |
+|:-------------:|:------------:|
+| | |
+| | |
+| | |
 
 
 Commands:
