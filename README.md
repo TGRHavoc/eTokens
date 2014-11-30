@@ -13,7 +13,7 @@ The XML is really easy to grasp. All you need to do is add a "token" tab and tel
 
 Below are some example and what attribute means what.
 
-'''XML
+```XML
 <!-- This token is rewarded when the player breaks 10 diamond_ore blocks, they are given 10 tokens and sent the message -->
 <token block-amount="10" block-type="DIAMOND_ORE" objective="block-break" token-amount="10">Well done {PLAYER}, have received {TOKEN-AMOUNT} token(s) for breaking {BLOCK-AMOUNT} {BLOCK-TYPE} block(s)!</token>
 
@@ -23,7 +23,7 @@ Below are some example and what attribute means what.
 <!-- This token is rewarded when the player kills 10 zombies. This rewards them with 10 tokens. 
 This also has the "repeatable" attribute which means that the user can complete this for as many times as they want -->
 <token entity-type="ZOMBIE" kills="10" objective="kill" repeatable="true" token-amount="10">You have received {TOKEN-AMOUNT} tokens for killing {KILLS} {ENTITY-TYPE}(s)!</token>
-'''
+```
 
 
 
