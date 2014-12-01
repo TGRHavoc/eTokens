@@ -27,9 +27,14 @@ This also has the "repeatable" attribute which means that the user can complete 
 
 | XML Attribute | What it does |
 |:-------------:|:------------:|
-| | |
-| | |
-| | |
+| objective | This sets the objective that the player needs to complete in order to receive the token | block-break, kill, achievement |
+| token-amount | This is the amount of tokens you want to reward the player with | Any number between 0 and 2147483647|
+| block-amount| This should only be used with the "block-break" objectives, this is how many blocks the player needs to break |Any number between 0 and 2147483647|
+|block-type|The type of block that the user needs to break| [[http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html|See here]] |
+|achievement|This should only be used with the "achievement" objective. This is the name of the achievement that the user needs to get| [[http://jd.bukkit.org/rb/apidocs/org/bukkit/Achievement.html|See here]]|
+|entity-type|This should only be used with the "kills" objective. This is the type of mob that the player needs to kill| [[http://jd.bukkit.org/rb/apidocs/org/bukkit/entity/EntityType.html|See here]]||
+|kills|The amount of entities the player needs to kill| Any number between 0 and 2147483647|
+|repeatable| States whether an objective can be repeated by the player (Currently only works with kills and block-break)| true or false|
 
 
 Commands:
