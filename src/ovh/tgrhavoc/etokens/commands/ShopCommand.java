@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import ovh.tgrhavoc.etokens.eTokens;
 import ovh.tgrhavoc.etokens.shop.Shop;
@@ -35,14 +37,21 @@ public class ShopCommand implements CommandExecutor{
 			sender.sendMessage(ChatColor.RED + "Sorry, only players can open shops!");
 			return true;
 		}
-		if (args.length == 0)
-			return false;
+		if (args.length == 0){
+			sendHelp(sender);
+			return true;
+		}
 		
-		if (args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("add")){
+		if (args[0].equals("help")){
+			sendHelp(sender);
+			return true;
+		}
+		
+		if (args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("command")){
 			if (!sender.hasPermission("etokens.shop.create")){
 				sender.sendMessage(ChatColor.RED +"You don't have permission to execute this command :(");
 				return true;
-			}
+			}			
 			if (args.length == 2 && args[0].equalsIgnoreCase("create")){
 				try {
 					createShopFile(args[1]);
@@ -70,6 +79,26 @@ public class ShopCommand implements CommandExecutor{
 				}
 				return true;
 			}
+
+			if (args.length >= 3 && args[0].equalsIgnoreCase("command")){
+				String name = args[1]; // Shop name
+				int price = 0;
+				
+				try{
+					price =  Integer.parseInt(args[2]);
+				}catch(NumberFormatException e){
+					sender.sendMessage(ChatColor.RED +"You see what you have done?? You didn't enter a number now look at this error:\n" + e.getMessage() );
+					return true;
+				}
+				StringBuffer command = new StringBuffer();
+				for (int i=3; i<args.length; i++){
+					command.append(args[i] + " ");
+				}
+				
+				addCommand(sender, name, price, command.toString());
+				
+				return true;
+			}
 		}
 		
 		String shopName = args[0];
@@ -83,7 +112,7 @@ public class ShopCommand implements CommandExecutor{
 			}
 			return true;
 		}
-		if (sender.hasPermission("etokens.shop." + shopName)){
+		if (sender.hasPermission("etokens.shop." + shopName) && !sender.isOp()){
 			sender.sendMessage(ChatColor.RED +"You need the permission to access " +shopName);
 			return true;
 		}
@@ -92,6 +121,32 @@ public class ShopCommand implements CommandExecutor{
 		
 		
 		return false;
+	}
+
+	private void addCommand(CommandSender sender, String name, int price,
+			String cmd) {
+		File xmlFile = new File(shopsFolder + File.separator + name + ".yml");
+		
+		ItemStack itemToAdd = new ItemStack(Material.BEACON);
+		
+		ItemMeta m = itemToAdd.getItemMeta();
+		m.setDisplayName(cmd);
+		
+		itemToAdd.setItemMeta(m);
+		
+		YamlConfiguration yamlConf = YamlConfiguration.loadConfiguration(xmlFile);
+		
+		int num = (yamlConf.getConfigurationSection("items").getValues(false)).size();
+		yamlConf.set("items.item" + num +".merch", itemToAdd);
+		yamlConf.set("items.item"+num+".price", price);
+		yamlConf.set("items.item"+num + ".isCommand", true);
+		
+		
+		try {
+			yamlConf.save(xmlFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void openShop(Player sender, String shopName) {
@@ -134,6 +189,16 @@ public class ShopCommand implements CommandExecutor{
 		yamlConf.set("name", "`" + (new Random().nextInt(8)) +string);
 		yamlConf.save(xmlFile);
 
+	}
+	
+	private void sendHelp(CommandSender sender) {
+		sender.sendMessage(ChatColor.AQUA + "/shop [help] -" + ChatColor.GOLD+" Shows this message");
+		
+		sender.sendMessage(ChatColor.AQUA + "/tokens see -" + ChatColor.GOLD+" See your eToken balance");
+		sender.sendMessage(ChatColor.AQUA + "/tokens add <Player> <Amount> -" + ChatColor.GOLD+" Add some tokens to this player's account");
+		sender.sendMessage(ChatColor.AQUA + "/tokens remove <Player> <Amount> -" + ChatColor.GOLD+" Remove some tokens from this player's account");
+		sender.sendMessage(ChatColor.AQUA + "/tokens set <Player> <Amount> -" + ChatColor.GOLD+" Set this players token count");
+		sender.sendMessage(ChatColor.AQUA + "/tokens give <Player> <Amount> -" + ChatColor.GOLD+" Give this player some of your tokens");
 	}
 	
 	

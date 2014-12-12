@@ -16,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.bukkit.Achievement;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -70,9 +71,26 @@ public class XMLHandler {
 				if (node.hasAttributes()) {
 					for (int i = 0; i < node.getAttributes().getLength(); i++) {
 						Node atrr = node.getAttributes().item(i);
+						
 						if (atrr.getNodeName().equalsIgnoreCase("token-amount")) {
-							token.setTokenAmount((int)Integer.parseInt(atrr.getNodeValue()));
+							token.setTokenAmount(Integer.parseInt(atrr.getNodeValue()));
 						}
+						
+						if (atrr.getNodeName().equalsIgnoreCase("money")) {
+							Bukkit.broadcastMessage("Found money atrr: " + atrr.getNodeValue());
+							if (plugin.canUseVault()){
+								token.setEcoAmount(Double.parseDouble(atrr.getNodeValue()));
+							}else{
+								Bukkit.getLogger().severe("[eTokens]: It seems that you're trying to use economy money when you don't have vault installed!\n"
+										+ "Please install vault then reload this plugin!");
+							}
+						}
+						if (atrr.getNodeName().equalsIgnoreCase("use-tokens")) {
+							Bukkit.broadcastMessage("Found use-tokens atrr");
+							token.setUseToken(Boolean.parseBoolean(atrr.getNodeValue()));
+						}
+						
+						
 						if (atrr.getNodeName().equalsIgnoreCase("block-amount")) {
 							token.setBlockAmount(Integer.parseInt(atrr.getNodeValue()));
 						}

@@ -63,4 +63,5 @@ You can find these permissions and their corresponding commands below
 | etokens.give | /token give |
 | etokens.shop.create | /shop create|
 | etokens.shop.create | /shop add|
+| etokens.shop.create | /shop command|
 | etokens.shop.<ShopName> | This will give the player permission to open the specified shop|

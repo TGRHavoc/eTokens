@@ -10,10 +10,29 @@ public class Token {
 	int distance;
 	String achievement;
 	
+	boolean useToken = true;
+	public boolean canUseToken() {
+		return useToken;
+	}
+
+	public void setUseToken(boolean useToken) {
+		this.useToken = useToken;
+	}
+
+	double econAmount;
+	
 	int kills;
 	String entityType;
 	
 	boolean repeatable = false;
+	
+	public double getEconomyAmount(){
+		return this.econAmount;
+	}
+	
+	public void setEcoAmount(double amount){
+		this.econAmount = amount;
+	}
 	
 	public boolean isRepeatable() {
 		return repeatable;
@@ -104,7 +123,11 @@ public class Token {
 		return "Token [tokenAmount=" + tokenAmount + ", message=" + message
 				+ ", objective=" + objective + ", blockType=" + blockType
 				+ ", blockAmount=" + blockAmount + ", distance=" + distance
-				+ ", achievement=" + achievement + "]";
+				+ ", achievement=" + achievement + ", useToken=" + useToken
+				+ ", econAmount=" + econAmount + ", kills=" + kills
+				+ ", entityType=" + entityType + ", repeatable=" + repeatable
+				+ "]";
 	}
-
+	
+	
 }

@@ -24,6 +24,11 @@ public class CommandHandler implements CommandExecutor{
 			return true;
 		}
 		
+		if (args[0].equals("help")){
+			sendHelp(sender);
+			return true;
+		}
+		
 		if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("set") || args[0].equalsIgnoreCase("take")){
 			if (!sender.hasPermission("etokens.admin")){
 				sender.sendMessage(ChatColor.RED + "You don't have sufficient permissions to run this command!");
@@ -96,10 +101,12 @@ public class CommandHandler implements CommandExecutor{
 	}
 
 	private void sendHelp(CommandSender sender) {
-		sender.sendMessage("/tokens add <Player> <Amount> - Add some tokens to this player's account");
-		sender.sendMessage("/tokens remove <Player> <Amount> - Remove some tokens to this player's account");
-		sender.sendMessage("/tokens set <Player> <Amount> - Set this players token count");
-		sender.sendMessage("/tokens give <Player> <Amount> - Give this player some of your tokens");
+		sender.sendMessage(ChatColor.AQUA + "/tokens [help] -" + ChatColor.GOLD+" Shows this message");
+		sender.sendMessage(ChatColor.AQUA + "/tokens see -" + ChatColor.GOLD+" See your eToken balance");
+		sender.sendMessage(ChatColor.AQUA + "/tokens add <Player> <Amount> -" + ChatColor.GOLD+" Add some tokens to this player's account");
+		sender.sendMessage(ChatColor.AQUA + "/tokens remove <Player> <Amount> -" + ChatColor.GOLD+" Remove some tokens from this player's account");
+		sender.sendMessage(ChatColor.AQUA + "/tokens set <Player> <Amount> -" + ChatColor.GOLD+" Set this players token count");
+		sender.sendMessage(ChatColor.AQUA + "/tokens give <Player> <Amount> -" + ChatColor.GOLD+" Give this player some of your tokens");
 	}
 
 }

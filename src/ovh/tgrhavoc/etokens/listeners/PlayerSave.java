@@ -3,6 +3,7 @@ package ovh.tgrhavoc.etokens.listeners;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PlayerSave implements Serializable{
@@ -55,7 +56,7 @@ public class PlayerSave implements Serializable{
 	}
 	
 	public int getBlocks(String mat){
-		return blocks.get(mat);
+		return blocks.get(mat.toLowerCase());
 	}
 
 	public void resetKills(String entityType) {
