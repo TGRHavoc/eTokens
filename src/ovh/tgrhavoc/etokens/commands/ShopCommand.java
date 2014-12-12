@@ -194,11 +194,10 @@ public class ShopCommand implements CommandExecutor{
 	private void sendHelp(CommandSender sender) {
 		sender.sendMessage(ChatColor.AQUA + "/shop [help] -" + ChatColor.GOLD+" Shows this message");
 		
-		sender.sendMessage(ChatColor.AQUA + "/tokens see -" + ChatColor.GOLD+" See your eToken balance");
-		sender.sendMessage(ChatColor.AQUA + "/tokens add <Player> <Amount> -" + ChatColor.GOLD+" Add some tokens to this player's account");
-		sender.sendMessage(ChatColor.AQUA + "/tokens remove <Player> <Amount> -" + ChatColor.GOLD+" Remove some tokens from this player's account");
-		sender.sendMessage(ChatColor.AQUA + "/tokens set <Player> <Amount> -" + ChatColor.GOLD+" Set this players token count");
-		sender.sendMessage(ChatColor.AQUA + "/tokens give <Player> <Amount> -" + ChatColor.GOLD+" Give this player some of your tokens");
+		sender.sendMessage(ChatColor.AQUA + "/shop create <ShopName> -" + ChatColor.GOLD+" Creates a shop with the specified name (Case sensitive)");
+		sender.sendMessage(ChatColor.AQUA + "/shop add <ShopName> <Price> -" + ChatColor.GOLD+" Add the currently held item to the specified shop");
+		sender.sendMessage(ChatColor.AQUA + "/shop <ShopName> -" + ChatColor.GOLD+" Open the specified shop");
+		sender.sendMessage(ChatColor.AQUA + "/shop command <ShopName> <Price> <Command> -" + ChatColor.GOLD+" Add a command to the shop with the specified price.");
 	}
 	
 	
