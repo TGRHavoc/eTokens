@@ -35,7 +35,7 @@ public class PlayerSave implements Serializable{
 	}
 	
 	public void addBlock(String blockMat){
-		if (blocks.get(blockMat) == null){
+		if (blocks.get(blockMat) == null || !blocks.containsKey(blockMat)){
 			blocks.put(blockMat, 1);
 			return;
 		}
@@ -56,7 +56,7 @@ public class PlayerSave implements Serializable{
 	}
 	
 	public int getBlocks(String mat){
-		return blocks.get(mat.toLowerCase());
+		return blocks.get(mat);
 	}
 
 	public void resetKills(String entityType) {

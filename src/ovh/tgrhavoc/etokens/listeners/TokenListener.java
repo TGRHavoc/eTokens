@@ -265,8 +265,13 @@ public class TokenListener implements Listener {
 
 	@EventHandler
 	public void joinEvent(PlayerJoinEvent e) {
-		plugin.playerSaveData.put(e.getPlayer().getUniqueId().toString(),
-				new PlayerSave(e.getPlayer()));
+		if (!plugin.playerSaveData.containsKey(e.getPlayer().getUniqueId().toString())){
+			plugin.playerSaveData.put(e.getPlayer().getUniqueId().toString(),
+					new PlayerSave(e.getPlayer()));
+			if (plugin.getSqlHandler().getTokenAmount(e.getPlayer()) > 0){
+				plugin.getSqlHandler().setPlayerTokens(e.getPlayer(), 0);
+			}
+		}
 	}
 
 }
