@@ -1,6 +1,6 @@
 name: eTokens
 main: ovh.tgrhavoc.etokens.eTokens
-version: 2.0
+version: 2.2
 author: TGRHavoc
 softdepend: [Vault]
 
