@@ -112,7 +112,7 @@ public class ShopCommand implements CommandExecutor{
 			}
 			return true;
 		}
-		if (sender.hasPermission("etokens.shop." + shopName)){
+		if (!sender.hasPermission("etokens.shop." + shopName)){
 			sender.sendMessage(ChatColor.RED +"You need the permission to access " +shopName);
 			return true;
 		}
