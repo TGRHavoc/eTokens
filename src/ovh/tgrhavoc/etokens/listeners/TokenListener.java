@@ -143,7 +143,7 @@ public class TokenListener implements Listener {
 
 	@EventHandler
 	public void invClick(InventoryClickEvent e) {
-		if (!e.getInventory().getName().contains("Shop"))
+		if (!e.getInventory().getName().contains("Token Shop (by Havoc)"))
 			return;
 
 		if (e.getRawSlot() > (e.getInventory().getSize()))

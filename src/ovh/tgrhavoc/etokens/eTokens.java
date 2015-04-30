@@ -74,6 +74,7 @@ public class eTokens extends JavaPlugin {
 		}
 		
 		xmlHandler = new XMLHandler(this);
+		
 	}
 	public SQLHandler getSqlHandler() {
 		return sqlHandler;
