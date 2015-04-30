@@ -39,7 +39,7 @@ public class CommandHandler implements CommandExecutor{
 				return true;
 			}
 			String operation = args[0];
-			OfflinePlayer player = (Player)Bukkit.getOfflinePlayer(args[1]);
+			OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
 			int amount = 0;
 			try{
 				amount =  Integer.parseInt(args[2]);
@@ -94,7 +94,17 @@ public class CommandHandler implements CommandExecutor{
 		
 		if ( (args[0].equalsIgnoreCase("amount") || args[0].equalsIgnoreCase("see") || args[0].equalsIgnoreCase("balanace") ||
 				args[0].equalsIgnoreCase("bal")) && sender instanceof Player){
-			sender.sendMessage(ChatColor.AQUA + "Your current balance is "+ ChatColor.GOLD + plugin.getSqlHandler().getTokenAmount((Player)sender) + ChatColor.AQUA+" tokens");
+			if (args.length == 1){
+				sender.sendMessage(ChatColor.AQUA + "Your current balance is "+ ChatColor.GOLD + plugin.getSqlHandler().getTokenAmount((Player)sender) + ChatColor.AQUA+" tokens");
+			}else if(args.length == 2){
+				OfflinePlayer toGet = Bukkit.getOfflinePlayer(args[1]);
+				if (!toGet.hasPlayedBefore()){
+					sender.sendMessage(ChatColor.RED + "Sorry, this player hasn't played on this server before. They have no tokens.");
+				}
+				sender.sendMessage(ChatColor.GREEN + toGet.getName() +ChatColor.AQUA + " has " + ChatColor.GOLD + plugin.getSqlHandler().getTokenAmount(toGet.getPlayer()) + ChatColor.AQUA + " tokens!");
+			}else{
+				sender.sendMessage(ChatColor.RED + "I don't know what you're trying to do but, you've specified too many arguments!\nTry /see <Player> to see a player's token amount");
+			}
 		}
 		
 		return false;
