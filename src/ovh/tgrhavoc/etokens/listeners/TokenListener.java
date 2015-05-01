@@ -37,8 +37,9 @@ public class TokenListener implements Listener {
 
 	@EventHandler
 	public void tokenRecieved(TokenEvent e) {
+		//System.out.println("Token event called");
 		Token t = e.getTokenForThisEvent();
-
+		
 		if (t.canUseToken())
 			addTokenAmount(e.getPlayer(), t);
 				
@@ -47,14 +48,12 @@ public class TokenListener implements Listener {
 		}
 		
 		if (t.isRepeatable()) {
-			if (t.getObjective().equalsIgnoreCase("kill"))
-				plugin.playerSaveData.get(
-						e.getPlayer().getUniqueId().toString()).resetKills(
-						t.getEntityType());
-			if (t.getObjective().equalsIgnoreCase("block-break"))
-				plugin.playerSaveData.get(
-						e.getPlayer().getUniqueId().toString()).resetBlocks(
-						t.getBlockType());
+			if (t.getObjective().equalsIgnoreCase("kill")){
+				plugin.playerSaveData.get(e.getPlayer().getUniqueId().toString()).resetKills(t.getEntityType());
+			}
+			if (t.getObjective().equalsIgnoreCase("block-break")){
+				plugin.playerSaveData.get(e.getPlayer().getUniqueId().toString()).resetBlocks(t.getBlockType());
+			}
 		}
 	}
 
@@ -239,14 +238,14 @@ public class TokenListener implements Listener {
 
 					plugin.playerSaveData.get(player.getUniqueId().toString())
 							.addBlock("all");
-					if (plugin.playerSaveData.get(
-							player.getUniqueId().toString()).getBlocks(
-							t.getBlockType().toLowerCase()) == t
-							.getBlockAmount()) {
+					
+					if (plugin.playerSaveData.get(player.getUniqueId().toString()).getBlocks(
+							t.getBlockType().toLowerCase()) == t.getBlockAmount()) {
 						callTokenEvent(player, t);
 					}
-					return;
+					continue; //Continue onto next token check instead of stopping (used to be return)
 				}
+				
 				if (block.getType() == Material.valueOf(t.getBlockType())) {
 					plugin.playerSaveData.get(player.getUniqueId().toString())
 							.addBlock(block.getType().toString());

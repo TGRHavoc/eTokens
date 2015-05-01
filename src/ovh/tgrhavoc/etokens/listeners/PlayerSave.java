@@ -2,6 +2,7 @@ package ovh.tgrhavoc.etokens.listeners;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -37,8 +38,10 @@ public class PlayerSave implements Serializable{
 	public void addBlock(String blockMat){
 		if (blocks.get(blockMat) == null || !blocks.containsKey(blockMat)){
 			blocks.put(blockMat, 1);
+			System.out.println("Added new block :" + blockMat + " for " + Bukkit.getPlayer(UUID.fromString(playerUUID)).getName());
 			return;
 		}
+		
 		int currentBlockBreaks = blocks.get(blockMat);
 		blocks.put(blockMat, currentBlockBreaks + 1);
 	}
@@ -47,15 +50,20 @@ public class PlayerSave implements Serializable{
 			kills.put(entType, 1);
 			return;
 		}
+		
 		int currentKills = kills.get(entType);
 		kills.put(entType, currentKills + 1);
 	}
 	
 	public int getKills(String ent){
+		if (!kills.containsKey(ent))
+			kills.put(ent, 0);
 		return kills.get(ent);
 	}
 	
 	public int getBlocks(String mat){
+		if (!blocks.containsKey(mat))
+			blocks.put(mat, 0);
 		return blocks.get(mat);
 	}
 
