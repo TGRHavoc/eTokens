@@ -52,7 +52,7 @@ public class TokenListener implements Listener {
 				plugin.playerSaveData.get(e.getPlayer().getUniqueId().toString()).resetKills(t.getEntityType());
 			}
 			if (t.getObjective().equalsIgnoreCase("block-break")){
-				plugin.playerSaveData.get(e.getPlayer().getUniqueId().toString()).resetBlocks(t.getBlockType());
+				plugin.playerSaveData.get(e.getPlayer().getUniqueId().toString()).resetBlocks(t.getBlockType().toLowerCase());
 			}
 		}
 	}
@@ -234,13 +234,12 @@ public class TokenListener implements Listener {
 			// System.out.println(t.toString());
 
 			if (t.getObjective().equalsIgnoreCase("block-break")) {
+				
 				if (t.getBlockType().equalsIgnoreCase("ALL")) {
-
-					plugin.playerSaveData.get(player.getUniqueId().toString())
-							.addBlock("all");
+					plugin.playerSaveData.get(player.getUniqueId().toString()).addBlock(t.getBlockType().toLowerCase());
 					
-					if (plugin.playerSaveData.get(player.getUniqueId().toString()).getBlocks(
-							t.getBlockType().toLowerCase()) == t.getBlockAmount()) {
+					if (plugin.playerSaveData.get(player.getUniqueId().toString()).getBlocks(t.getBlockType().toLowerCase())
+							>= t.getBlockAmount()) {
 						callTokenEvent(player, t);
 					}
 					continue; //Continue onto next token check instead of stopping (used to be return)
