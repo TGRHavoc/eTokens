@@ -118,11 +118,7 @@ public class TokenListener implements Listener {
 			if (t.getObjective().equalsIgnoreCase("kill")) {
 				if (e.getEntityType() == EntityType.valueOf(t.getEntityType())) {
 					plugin.playerSaveData.get(player.getUniqueId().toString())
-							.addKill(e.getEntityType().toString()); // Increase
-																	// the kill
-																	// score for
-																	// this
-																	// entity
+							.addKill(e.getEntityType().toString());
 
 					if (plugin.playerSaveData.get(
 							player.getUniqueId().toString()).getKills(
@@ -239,7 +235,7 @@ public class TokenListener implements Listener {
 					plugin.playerSaveData.get(player.getUniqueId().toString()).addBlock(t.getBlockType().toLowerCase());
 					
 					if (plugin.playerSaveData.get(player.getUniqueId().toString()).getBlocks(t.getBlockType().toLowerCase())
-							>= t.getBlockAmount()) {
+							== t.getBlockAmount()) {
 						callTokenEvent(player, t);
 					}
 					continue; //Continue onto next token check instead of stopping (used to be return)
@@ -247,11 +243,12 @@ public class TokenListener implements Listener {
 				
 				if (block.getType() == Material.valueOf(t.getBlockType())) {
 					plugin.playerSaveData.get(player.getUniqueId().toString())
-							.addBlock(block.getType().toString());
+							.addBlock(t.getBlockType().toString().toLowerCase());
 
 					if (plugin.playerSaveData.get(
 							player.getUniqueId().toString()).getBlocks(
-							block.getType().toString()) == t.getBlockAmount()) {
+							block.getType().toString().toLowerCase()) == t.getBlockAmount()) {
+						//System.out.println("Added to block: " + block.getType().toString().toLowerCase());
 						callTokenEvent(player, t);
 					}
 
