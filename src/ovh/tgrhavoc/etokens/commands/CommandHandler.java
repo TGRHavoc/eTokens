@@ -29,7 +29,7 @@ public class CommandHandler implements CommandExecutor{
 			return true;
 		}
 		
-		if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("set") || args[0].equalsIgnoreCase("take")){
+		if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("set") || args[0].equalsIgnoreCase("take") || args[0].equalsIgnoreCase("remove")){
 			if (!sender.hasPermission("etokens.admin")){
 				sender.sendMessage(ChatColor.RED + "You don't have sufficient permissions to run this command!");
 				return true;
