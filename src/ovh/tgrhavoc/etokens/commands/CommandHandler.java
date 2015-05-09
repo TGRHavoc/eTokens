@@ -55,7 +55,7 @@ public class CommandHandler implements CommandExecutor{
 				plugin.getSqlHandler().increasePlayerToken(player.getPlayer(), amount);
 				sender.sendMessage(ChatColor.GREEN + "You have sucessfully increased " + player.getName() +"'s tokens by " + ChatColor.GOLD + amount);
 			}
-			if (operation.equalsIgnoreCase("take")){
+			if (operation.equalsIgnoreCase("take") || operation.equalsIgnoreCase("remove")){
 				plugin.getSqlHandler().increasePlayerToken(player.getPlayer(), -amount);
 				sender.sendMessage(ChatColor.GREEN + "You have sucessfully decreased " + player.getName() +"'s tokens by " + ChatColor.GOLD + amount);
 			}
