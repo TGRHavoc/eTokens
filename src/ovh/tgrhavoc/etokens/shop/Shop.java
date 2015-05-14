@@ -24,7 +24,7 @@ public class Shop {
 	public Shop(File shopFile) {
 		YamlConfiguration conf = YamlConfiguration.loadConfiguration(shopFile);
 		
-		String name = ChatColor.translateAlternateColorCodes('`', conf.getString("name") + " Token Shop (by Havoc) ");
+		String name = ChatColor.translateAlternateColorCodes('`', conf.getString("name") + " TShop");
 		
 		for (int i=0; i< conf.getConfigurationSection("items").getValues(false).size(); i++){
 			
